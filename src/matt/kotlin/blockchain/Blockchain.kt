@@ -21,7 +21,7 @@ class Blockchain<T: Serializable>
 
 class Block<T: Serializable>(val priorBlock: Block<T>?, val data: T)
 {
-    val priorHash: ImmutableByteArray = priorBlock?.hash() ?: ImmutableByteArray(ByteArray(8))
+    val priorHash: ImmutableByteArray = priorBlock?.hash() ?: ImmutableByteArray(MessageDigest.getInstance("SHA-256").digest())
     
     fun hash(): ImmutableByteArray
     {
