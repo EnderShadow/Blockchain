@@ -8,18 +8,18 @@ import matt.kotlin.blockchain.ImmutableByteArray.Companion.update
 import java.io.ByteArrayOutputStream
 import java.io.ObjectOutputStream
 
-object Blockchain
+class Blockchain<T: Serializable>
 {
-    var head: Block? = null
+    var head: Block<T>? = null
         private set
     
-    fun addBlock(data: Serializable)
+    fun addBlock(data: T)
     {
         head = Block(head, data)
     }
 }
 
-class Block(val priorBlock: Block?, val data: Serializable)
+class Block<T: Serializable>(val priorBlock: Block<T>?, val data: T)
 {
     val priorHash: ImmutableByteArray = priorBlock?.hash() ?: ImmutableByteArray(ByteArray(8))
     
